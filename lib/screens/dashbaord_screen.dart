@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/min_max_temperature_component.dart';
+
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           child: Container(
             height: screenHeight * (6 / 10),
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(24),
@@ -30,6 +33,35 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ],
               color: Color.fromARGB(240, 255, 255, 255),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Text(
+                    "55",
+                    style: TextStyle(
+                      fontSize: 64,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MinMaxTemperatureComponent(
+                        temperature: "25",
+                        isMin: true,
+                      ),
+                      MinMaxTemperatureComponent(
+                        temperature: "25",
+                        isMin: false,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

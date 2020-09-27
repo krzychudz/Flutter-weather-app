@@ -58,6 +58,12 @@ flutter:
     - assets/images/landscape_vector.png
     - assets/images/arrow_up.png
     - assets/images/arrow_down.png
+    - assets/images/time_high.png
+    - assets/images/time_low.png
+    - assets/images/total_time.png
+    - assets/images/wi-barometer.png
+    - assets/images/wi-humidity.png
+    - assets/images/wi-strong-wind.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -8,12 +8,12 @@ part of 'weather_info.dart';
 
 WeatherInfo _$WeatherInfoFromJson(Map<String, dynamic> json) {
   return WeatherInfo(
-    json['temp_max'] as int,
-    json['feels_like'] as int,
-    json['temp_min'] as int,
-    json['tempMax'] as int,
-    json['pressure'] as int,
-    json['humidity'] as int,
+    (json['temp_max'] as num)?.toDouble(),
+    (json['feels_like'] as num)?.toDouble(),
+    (json['temp_min'] as num)?.toDouble(),
+    (json['tempMax'] as num)?.toDouble(),
+    (json['pressure'] as num)?.toDouble(),
+    (json['humidity'] as num)?.toDouble(),
   );
 }
 

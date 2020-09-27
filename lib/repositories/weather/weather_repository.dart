@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:weather_app/keys/secret_loader.dart';
-import 'package:weather_app/models/weather.dart';
+import '../../keys/secret_loader.dart';
+import '../../models/weather/weather.dart';
 
 import 'weater_repository_interface.dart';
 

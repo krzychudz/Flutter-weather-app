@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/repositories/weather/weather_repository.dart';
 
-import '../components/min_max_temperature_component.dart';
+import '../components/min_max_temperature/min_max_temperature_component.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
+    WeatherRepository rep = WeatherRepository();
+    rep.getWeatherByCity("Poznan").then((value) => print(value.main.feelsLike));
 
     return Scaffold(
       body: Center(

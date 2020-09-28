@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_app/models/weather/weather.dart';
 import '../components/temperature_info/temperaute_info.dart';
 import '../enums/temperature_info_type.dart';
 import '../repositories/weather/weather_repository.dart';
@@ -9,9 +11,6 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
-    WeatherRepository rep = WeatherRepository();
-    rep.getWeatherByCity("Poznan").then((value) => print(value.main.feelsLike));
 
     return Scaffold(
       body: Center(
@@ -24,24 +23,34 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
           child: Container(
-            height: screenHeight * (6 / 10),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(24),
-                topLeft: Radius.circular(24),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(25, 0, 0, 0),
-                  offset: Offset(0.0, -2.0),
-                  blurRadius: 4.0,
+              height: screenHeight * (6 / 10),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(24),
+                  topLeft: Radius.circular(24),
                 ),
-              ],
-              color: Color.fromARGB(240, 255, 255, 255),
-            ),
-            child: WeatherInfoSection(),
-          ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(25, 0, 0, 0),
+                    offset: Offset(0.0, -2.0),
+                    blurRadius: 4.0,
+                  ),
+                ],
+                color: Color.fromARGB(240, 255, 255, 255),
+              ),
+              child: FutureBuilder<Weather>(
+                future: WeatherRepository().getWeatherByCity("Poznan"),
+                builder:
+                    (BuildContext context, AsyncSnapshot<Weather> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return WeatherInfoSection(snapshot.data);
+                },
+              )),
         ),
       ),
     );
@@ -49,9 +58,9 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class WeatherInfoSection extends StatelessWidget {
-  const WeatherInfoSection({
-    Key key,
-  }) : super(key: key);
+  Weather weatherInfo;
+
+  WeatherInfoSection(this.weatherInfo);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +70,7 @@ class WeatherInfoSection extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "55",
+              "${weatherInfo.main.temp.toStringAsFixed(1)}\u00B0C",
               style: TextStyle(
                 fontSize: 64,
               ),
@@ -73,11 +82,13 @@ class WeatherInfoSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MinMaxTemperatureComponent(
-                  temperature: "25",
+                  temperature:
+                      "${weatherInfo.main.tempMin.toStringAsFixed(1)}\u00B0C",
                   isMin: true,
                 ),
                 MinMaxTemperatureComponent(
-                  temperature: "25",
+                  temperature:
+                      "${weatherInfo.main.tempMax.toStringAsFixed(1)}\u00B0C",
                   isMin: false,
                 ),
               ],
@@ -90,15 +101,15 @@ class WeatherInfoSection extends StatelessWidget {
               children: [
                 TemperatureInfo(
                   viewType: TemperatureInfoType.PREASURE,
-                  data: "1000 hPa",
+                  data: "${weatherInfo.main.pressure.toStringAsFixed(0)} hPa",
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.HUMIDITY,
-                  data: "39%",
+                  data: "${weatherInfo.main.humidity.toStringAsFixed(0)}%",
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.WIND,
-                  data: "23 km/h",
+                  data: "${weatherInfo.wind.speed.toStringAsFixed(0)} km/h",
                 ),
               ],
             ),
@@ -107,15 +118,18 @@ class WeatherInfoSection extends StatelessWidget {
               children: [
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNRISE,
-                  data: "06:00",
+                  data:
+                      "${DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.sys.sunrise * 1000))}",
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNSET,
-                  data: "21:00",
+                  data:
+                      "${DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.sys.sunset * 1000))}",
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.DAY_TIME,
-                  data: "15h",
+                  data:
+                      "${DateFormat.H().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.dt * 1000))}h",
                 ),
               ],
             ),

@@ -4,12 +4,12 @@ part 'weather_info.g.dart';
 
 @JsonSerializable()
 class WeatherInfo {
+  final double temp;
   @JsonKey(name: 'feels_like')
   final double feelsLike;
   @JsonKey(name: 'temp_min')
   final double tempMin;
   @JsonKey(name: 'temp_max')
-  final double temp;
   final double tempMax;
   final double pressure;
   final double humidity;

@@ -8,10 +8,10 @@ part of 'weather_info.dart';
 
 WeatherInfo _$WeatherInfoFromJson(Map<String, dynamic> json) {
   return WeatherInfo(
-    (json['temp_max'] as num)?.toDouble(),
+    (json['temp'] as num)?.toDouble(),
     (json['feels_like'] as num)?.toDouble(),
     (json['temp_min'] as num)?.toDouble(),
-    (json['tempMax'] as num)?.toDouble(),
+    (json['temp_max'] as num)?.toDouble(),
     (json['pressure'] as num)?.toDouble(),
     (json['humidity'] as num)?.toDouble(),
   );
@@ -19,10 +19,10 @@ WeatherInfo _$WeatherInfoFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$WeatherInfoToJson(WeatherInfo instance) =>
     <String, dynamic>{
+      'temp': instance.temp,
       'feels_like': instance.feelsLike,
       'temp_min': instance.tempMin,
-      'temp_max': instance.temp,
-      'tempMax': instance.tempMax,
+      'temp_max': instance.tempMax,
       'pressure': instance.pressure,
       'humidity': instance.humidity,
     };

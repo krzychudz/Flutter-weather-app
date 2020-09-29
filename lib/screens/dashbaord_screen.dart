@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_app/models/weather/weather.dart';
 import '../components/temperature_info/temperaute_info.dart';
 import '../enums/temperature_info_type.dart';
 import '../repositories/weather/weather_repository.dart';
 
 import '../components/min_max_temperature/min_max_temperature_component.dart';
+
+import '../extension/extensions.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -70,7 +71,7 @@ class WeatherInfoSection extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "${weatherInfo.main.temp.toStringAsFixed(1)}\u00B0C",
+              weatherInfo.main.temp.formatTemperature(),
               style: TextStyle(
                 fontSize: 64,
               ),
@@ -82,13 +83,11 @@ class WeatherInfoSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MinMaxTemperatureComponent(
-                  temperature:
-                      "${weatherInfo.main.tempMin.toStringAsFixed(1)}\u00B0C",
+                  temperature: weatherInfo.main.tempMin.formatTemperature(),
                   isMin: true,
                 ),
                 MinMaxTemperatureComponent(
-                  temperature:
-                      "${weatherInfo.main.tempMax.toStringAsFixed(1)}\u00B0C",
+                  temperature: weatherInfo.main.tempMax.formatTemperature(),
                   isMin: false,
                 ),
               ],
@@ -118,18 +117,15 @@ class WeatherInfoSection extends StatelessWidget {
               children: [
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNRISE,
-                  data:
-                      "${DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.sys.sunrise * 1000))}",
+                  data: weatherInfo.sys.sunrise.convertToDateAsString(),
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNSET,
-                  data:
-                      "${DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.sys.sunset * 1000))}",
+                  data: weatherInfo.sys.sunset.convertToDateAsString(),
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.DAY_TIME,
-                  data:
-                      "${DateFormat.H().format(DateTime.fromMillisecondsSinceEpoch(weatherInfo.dt * 1000))}h",
+                  data: "${weatherInfo.dt.convertToDateAsString()}h",
                 ),
               ],
             ),

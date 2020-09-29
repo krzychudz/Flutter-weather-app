@@ -27,6 +27,7 @@ dependencies:
   provider: ^4.3.2+2
   flutter_hooks: ^0.14.0
   json_annotation: ^3.0.0
+  intl: ^0.16.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +56,15 @@ flutter:
 
   assets:
     - secrets.json
+    - assets/images/landscape_vector.png
+    - assets/images/arrow_up.png
+    - assets/images/arrow_down.png
+    - assets/images/time_high.png
+    - assets/images/time_low.png
+    - assets/images/total_time.png
+    - assets/images/wi-barometer.png
+    - assets/images/wi-humidity.png
+    - assets/images/wi-strong-wind.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -67,17 +77,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Barlow
+      fonts:
+        - asset: assets/fonts/Barlow-Regular.ttf
+        - asset: assets/fonts/Barlow-Medium.ttf
+        - asset: assets/fonts/Barlow-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

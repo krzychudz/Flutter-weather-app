@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/components/daily_temperature/daily_temperature.dart';
+import 'package:weather_app/components/daily_temperature/daily_temperature_section.dart';
 import 'package:weather_app/models/weather/weather.dart';
 import '../components/temperature_info/temperaute_info.dart';
 import '../enums/temperature_info_type.dart';
@@ -59,7 +61,7 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class WeatherInfoSection extends StatelessWidget {
-  Weather weatherInfo;
+  final Weather weatherInfo;
 
   WeatherInfoSection(this.weatherInfo);
 
@@ -129,6 +131,7 @@ class WeatherInfoSection extends StatelessWidget {
                 ),
               ],
             ),
+            DailyTemperatureSection(),
           ],
         ),
       ),

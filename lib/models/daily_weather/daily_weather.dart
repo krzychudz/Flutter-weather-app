@@ -6,8 +6,7 @@ part 'daily_weather.g.dart';
 
 @JsonSerializable()
 class DailyWeather {
-  @JsonKey(name: "dt_txt")
-  final String dt;
+  final int dt;
   final WeatherInfo main;
   final Wind wind;
 

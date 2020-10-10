@@ -8,7 +8,7 @@ part of 'daily_weather.dart';
 
 DailyWeather _$DailyWeatherFromJson(Map<String, dynamic> json) {
   return DailyWeather(
-    json['dt_txt'] as String,
+    json['dt'] as int,
     json['main'] == null
         ? null
         : WeatherInfo.fromJson(json['main'] as Map<String, dynamic>),
@@ -20,7 +20,7 @@ DailyWeather _$DailyWeatherFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DailyWeatherToJson(DailyWeather instance) =>
     <String, dynamic>{
-      'dt_txt': instance.dt,
+      'dt': instance.dt,
       'main': instance.main,
       'wind': instance.wind,
     };

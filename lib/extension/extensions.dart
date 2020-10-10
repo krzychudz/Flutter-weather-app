@@ -1,9 +1,8 @@
 import 'package:intl/intl.dart';
 
 extension TimeParsing on int {
-  String convertToDateAsString() {
-    return DateFormat.Hm()
-        .format(DateTime.fromMillisecondsSinceEpoch(this * 1000));
+  String convertToDateAsString(DateFormat dateFormat) {
+    return dateFormat.format(DateTime.fromMillisecondsSinceEpoch(this * 1000));
   }
 }
 

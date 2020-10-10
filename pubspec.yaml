@@ -28,6 +28,7 @@ dependencies:
   flutter_hooks: ^0.14.0
   json_annotation: ^3.0.0
   intl: ^0.16.1
+  charts_flutter: ^0.9.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,11 +38,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
+  build_runner: ^1.10.3
   json_serializable: ^3.2.0
 
 dependency_overrides:
-  analyzer: '0.39.14'
+  analyzer: '0.40.4'
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_app/components/daily_temperature/daily_temperature.dart';
+import 'package:weather_app/components/daily_temperature/daily_temperature_section.dart';
 import 'package:weather_app/models/weather/weather.dart';
 import '../components/temperature_info/temperaute_info.dart';
 import '../enums/temperature_info_type.dart';
@@ -59,7 +62,7 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class WeatherInfoSection extends StatelessWidget {
-  Weather weatherInfo;
+  final Weather weatherInfo;
 
   WeatherInfoSection(this.weatherInfo);
 
@@ -117,18 +120,34 @@ class WeatherInfoSection extends StatelessWidget {
               children: [
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNRISE,
-                  data: weatherInfo.sys.sunrise.convertToDateAsString(),
+                  data: weatherInfo.sys.sunrise
+                      .convertToDateAsString(DateFormat.Hm()),
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.SUNSET,
-                  data: weatherInfo.sys.sunset.convertToDateAsString(),
+                  data: weatherInfo.sys.sunset
+                      .convertToDateAsString(DateFormat.Hm()),
                 ),
                 TemperatureInfo(
                   viewType: TemperatureInfoType.DAY_TIME,
-                  data: "${weatherInfo.dt.convertToDateAsString()}h",
+                  data:
+                      "${weatherInfo.dt.convertToDateAsString(DateFormat.Hm())}h",
                 ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+              ),
+              child: Text(
+                "5 day weather forecast",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            DailyTemperatureSection(),
           ],
         ),
       ),

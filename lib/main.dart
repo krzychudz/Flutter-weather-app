@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/screens/splash_screen.dart';
 
 import './screens/dashbaord_screen.dart';
+import 'package:geolocator/geolocator.dart';
+
+import 'constants/routes/routes.dart' as Routes;
 
 void main() {
   runApp(MyApp());
@@ -16,7 +20,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Barlow',
       ),
-      home: DashboardScreen(),
+      home: SplashScreen(),
+      routes: {
+        Routes.routeDashboard: (context) => DashboardScreen(),
+      },
     );
   }
 }

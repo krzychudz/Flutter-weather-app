@@ -13,6 +13,8 @@ import '../extension/extensions.dart';
 import 'package:geolocator/geolocator.dart';
 
 class DashboardScreen extends StatelessWidget {
+  static String routeName = '/dashboard';
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;

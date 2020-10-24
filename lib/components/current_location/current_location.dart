@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 
 class CurrentLocation extends StatelessWidget {
-  final Map<String, double> locationData;
+  final String cityName;
 
-  CurrentLocation({this.locationData});
+  CurrentLocation(this.cityName);
 
   @override
   Widget build(BuildContext context) {
@@ -21,25 +21,19 @@ class CurrentLocation extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            FutureBuilder<List<Placemark>>(
-              future: placemarkFromCoordinates(
-                locationData['latitude'],
-                locationData['longitude'],
+            if (cityName == null)
+              Center(
+                child: CircularProgressIndicator(),
+              )
+            else
+              Text(
+                cityName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              builder: (context, placeSnapshot) {
-                if (!placeSnapshot.hasData)
-                  return CircularProgressIndicator();
-                else
-                  return Text(
-                    placeSnapshot.data[0].locality,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-              },
-            ),
           ],
         ),
       ),

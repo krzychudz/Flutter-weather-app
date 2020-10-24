@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/components/current_location/current_location.dart';
 import 'package:weather_app/components/daily_temperature/daily_temperature_section.dart';
@@ -6,18 +7,20 @@ import 'package:weather_app/models/weather/weather.dart';
 import '../components/temperature_info/temperaute_info.dart';
 import '../enums/temperature_info_type.dart';
 import '../repositories/weather/weather_repository.dart';
+import '../repositories/location/location_repository.dart';
 
 import '../components/min_max_temperature/min_max_temperature_component.dart';
 
 import '../extension/extensions.dart';
 import 'package:geolocator/geolocator.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends HookWidget {
   static String routeName = '/dashboard';
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Center(
         child: Stack(
@@ -60,15 +63,12 @@ class DashboardScreen extends StatelessWidget {
                     },
                   )),
             ),
-            StreamBuilder(
-              stream: getPositionStream(),
+            FutureBuilder(
+              future: getLocationCity(),
               builder: (context, positionSnapshot) {
-                return CurrentLocation(
-                  locationData: {
-                    "latitude": positionSnapshot.data.latitude,
-                    "longitude": positionSnapshot.data.longitude
-                  },
-                );
+                print("TEMP:");
+                print(positionSnapshot.data);
+                return CurrentLocation(positionSnapshot.data);
               },
             ),
           ],

@@ -28,15 +28,9 @@ class SplashScreen extends HookWidget {
       BuildContext context) async {
     var permissionData = await checkPermission();
     if (permissionData == LocationPermission.denied) {
-      var locationPermission = await requestLocationPermission();
-      if (locationPermission) {
-        openDashboardScreen(context);
-      } else {
-        // TODO Go to location chooser screen
-      }
-    } else {
-      openDashboardScreen(context);
+      await requestLocationPermission();
     }
+    openDashboardScreen(context);
   }
 
   Future<bool> requestLocationPermission() async {

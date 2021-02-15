@@ -10,7 +10,6 @@ import '../repositories/weather/weather_repository.dart';
 import '../components/min_max_temperature/min_max_temperature_component.dart';
 
 import '../extension/extensions.dart';
-import 'package:geolocator/geolocator.dart';
 
 class DashboardScreen extends StatelessWidget {
   static String routeName = '/dashboard';
@@ -60,17 +59,7 @@ class DashboardScreen extends StatelessWidget {
                     },
                   )),
             ),
-            StreamBuilder(
-              stream: getPositionStream(),
-              builder: (context, positionSnapshot) {
-                return CurrentLocation(
-                  locationData: {
-                    "latitude": positionSnapshot.data.latitude,
-                    "longitude": positionSnapshot.data.longitude
-                  },
-                );
-              },
-            ),
+            CurrentLocation(),
           ],
         ),
       ),

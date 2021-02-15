@@ -5,9 +5,7 @@ import '../../models/daily_weather_response/daily_weather_response.dart';
 import '../../keys/secret_loader.dart';
 import '../../models/weather/weather.dart';
 
-import 'weater_repository_interface.dart';
-
-class WeatherRepository implements WeatherRepositoryInterface {
+class WeatherRepository {
   String _apiKey;
 
   WeatherRepository() {

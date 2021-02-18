@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import '../../repositories/location/location_repository.dart';
 
 class CurrentLocation extends StatelessWidget {

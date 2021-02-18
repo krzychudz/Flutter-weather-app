@@ -22,7 +22,7 @@ class DailyTemperatureSection extends StatelessWidget {
           );
         }
       },
-      future: WeatherRepository().getDailyWeatherByCity("Poznan"),
+      future: WeatherRepository().getDailyWeatherByCity(),
     );
   }
 

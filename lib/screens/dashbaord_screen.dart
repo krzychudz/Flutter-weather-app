@@ -47,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
                     color: Color.fromARGB(240, 255, 255, 255),
                   ),
                   child: FutureBuilder<Weather>(
-                    future: WeatherRepository().getWeatherByCity("Poznan"),
+                    future: WeatherRepository().getWeatherByCity(),
                     builder: (BuildContext context,
                         AsyncSnapshot<Weather> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
